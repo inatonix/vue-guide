@@ -16,6 +16,11 @@ const buy = (itemName: string) => {
   alert('Are you sure to buy ' + itemName + '?')
 }
 
+const clear = () => {
+  item1.name = ''
+  item1.price = 0
+}
+
 const inp1 = (e: any) => {
   console.log('インプッティング', e.target.value)
   item1.name = e.target.value
@@ -26,18 +31,14 @@ const inp2 = (e: any) => {
   item1.price = e.target.value
 }
 
-
-// const plus = () => {
-//   price1 += 1
-// }
-
 </script>
 
 <template>
   <div class="container">
     <h1>Payment</h1>
-    <input @input="inp1" />
-    <input @input="inp2" />
+    <input class="input" v-model="item1.name" />
+    <input class="input" v-model="item1.price" />
+    <button class="button" @click="clear">Clear</button>
     <div class="payment">
       <label>{{ item1.name }}</label>
       <label>{{ item1.price }} yen</label>
@@ -58,6 +59,14 @@ const inp2 = (e: any) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.input {
+  margin-bottom: 8px;
+}
+
+.button {
+  margin-bottom: 20px;
 }
 .payment {
   display: flex;
