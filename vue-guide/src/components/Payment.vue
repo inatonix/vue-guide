@@ -10,6 +10,10 @@ const buy = (itemName: string) => {
   alert('Are you sure to buy ' + itemName + '?')
 }
 
+const inp = (e: any) => {
+  console.log('インプッティング', e.target.value)
+}
+
 // const plus = () => {
 //   price1 += 1
 // }
@@ -19,6 +23,7 @@ const buy = (itemName: string) => {
 <template>
   <div class="container">
     <h1>Payment</h1>
+    <input @input="inp" />
     <div class="payment">
       <label>{{ itemName1 }}</label>
       <label>{{ price1 }} yen</label>
