@@ -5,8 +5,8 @@
   <div class="container">
     <h1>最近の支出</h1>
     <div class="payment">
-      <h2>カレーライス</h2>
-      <h3>400円</h3>
+      <label>カレーライス</label>
+      <label>400円</label>
     </div>
   </div>
 </template>
@@ -21,9 +21,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 80px;
   width: 400px;
   background-color: aliceblue;
   padding-left: 20px;
   padding-right: 20px;
+  font-weight: bold;
 }
 </style>

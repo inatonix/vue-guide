@@ -7,7 +7,6 @@ import Payment from './components/Payment.vue';
 
 <template>
   <Payment />
-  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
 </template>
 
 <style>
