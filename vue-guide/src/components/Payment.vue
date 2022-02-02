@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch, toRefs } from 'vue'
 
 // const itemName1 = ref<string>('Desk')
 // const price1 = 40000
@@ -31,14 +31,27 @@ const inp2 = (e: any) => {
   item1.price = e.target.value
 }
 
-const priceLabel = computed(() => {
-  if (item1.price > 50000) {
-    return 'too expensive'
+// const priceLabel = computed(() => {
+//   if (item1.price > 50000) {
+//     return 'too expensive'
+//   } else {
+//     return item1.price + 'yen'
+//   }
+// })
+
+const priceLabel = ref<string>(item1.price + 'yen')
+const { price } = toRefs(item1)
+watch(price, () => {
+  console.log('watch')
+  if (price.value > 50000) {
+    priceLabel.value = 'too expensive'
   } else {
-    return item1.price + 'yen'
+    priceLabel.value = item1.price + 'yen'
   }
-}
-)
+})
+
+
+
 </script>
 
 <template>
