@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import TweetCard from './TweetCard.vue';
-const tweets = reactive([{ id: 0, description: 'Hello, world!' }, { id: 1, description: 'This is the second tweet.' }])
+import { ref } from 'vue'
+const tweets = ref([{ id: 0, description: 'Hello, world!' }, { id: 1, description: 'This is the second tweet.' }])
 const inputtingDescription = ref<string>('')
 
 const postTweet = () => {
   const tweet = { id: Math.random(), description: inputtingDescription.value }
-  tweets.push(tweet)
+  tweets.value.push(tweet)
   inputtingDescription.value = ''
+}
+
+const deleteTweet = (id: number) => {
+  tweets.value = tweets.value.filter(v => v.id !== id)
 }
 
 </script>
@@ -21,7 +24,8 @@ const postTweet = () => {
     </div>
     <div>
       <li v-for="tweet in tweets" class="tweet-list">
-        <TweetCard :id="tweet.id" :description="tweet.description" />
+        <label>{{ tweet.description }}</label>
+        <button @click="deleteTweet(tweet.id)" class="delete-button">delete</button>
       </li>
     </div>
   </div>
@@ -45,7 +49,7 @@ const postTweet = () => {
   border-radius: 4px;
 }
 
-button {
+.save-button {
   color: #fff;
   font-weight: bold;
   background-color: #68c9c9;
@@ -55,8 +59,19 @@ button {
   height: 22px;
 }
 
-button:hover {
-  background-color: #37bdbd;
+.save-button:hover {
+  background-color: #3cafaf;
+}
+
+.delete-button {
+  color: #fff;
+  background-color: #c98768;
+  border-radius: 2px;
+  border: none;
+}
+
+.delete-button:hover {
+  background-color: #b66843;
 }
 
 input {
@@ -67,5 +82,12 @@ input {
   list-style: none;
   margin-bottom: 12px;
   border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(203, 223, 240);
+  border-radius: 4px;
+  padding: 8px 20px;
+  width: 300px;
 }
 </style>
