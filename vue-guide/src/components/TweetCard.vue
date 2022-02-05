@@ -2,7 +2,7 @@
 import { defineProps } from 'vue';
 
 type Props = {
-  id: string,
+  id: number,
   description: string,
 }
 

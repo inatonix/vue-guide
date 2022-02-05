@@ -1,14 +1,23 @@
 <script setup lang="ts">
+import { ref, reactive } from 'vue'
 import TweetCard from './TweetCard.vue';
-const tweets = [{ id: '0', description: 'Hello, world!' }, { id: '1', description: 'This is the second tweet.' }]
+const tweets = reactive([{ id: 0, description: 'Hello, world!' }, { id: 1, description: 'This is the second tweet.' }])
+const inputtingDescription = ref<string>('')
+
+const postTweet = () => {
+  const tweet = { id: Math.random(), description: inputtingDescription.value }
+  tweets.push(tweet)
+  inputtingDescription.value = ''
+}
+
 </script>
 
 <template>
   <div class="container">
     <h1>Tweeter</h1>
     <div class="form-container">
-      <input />
-      <button class="save-button">post</button>
+      <input v-model="inputtingDescription" />
+      <button class="save-button" @click="postTweet">post</button>
     </div>
     <div>
       <li v-for="tweet in tweets" class="tweet-list">
