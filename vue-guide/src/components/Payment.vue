@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const itemName1 = 'Desk'
+let itemName1 = 'Desk'
 const itemName2 = 'Bike'
 
 const price1 = 40000
@@ -12,11 +12,17 @@ const buy = (itemName: string) => {
   alert('Are you sure to buy ' + itemName + '?')
 }
 
+const input = (event: any) => {
+  console.log('event:', event.target.value)
+  itemName1 = event.target.value
+}
+
 </script>
 
 <template>
   <div class="container">
     <h1>Payment</h1>
+    <input v-on:input="input" />
     <div class="payment">
       <label>{{ itemName1 }}</label>
       <label>{{ price1 }} yen</label>
