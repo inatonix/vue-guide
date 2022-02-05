@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import TweetCard from './TweetCard.vue';
 const tweets = [{ id: '0', description: 'Hello, world!' }, { id: '1', description: 'This is the second tweet.' }]
-
-
 </script>
 
 <template>
@@ -11,9 +10,9 @@ const tweets = [{ id: '0', description: 'Hello, world!' }, { id: '1', descriptio
       <input />
       <button class="save-button">post</button>
     </div>
-    <div class="tweet-container">
+    <div>
       <li v-for="tweet in tweets" class="tweet-list">
-        <label>{{ tweet.description }}</label>
+        <TweetCard :id="tweet.id" :description="tweet.description" />
       </li>
     </div>
   </div>
@@ -55,14 +54,8 @@ input {
   margin-bottom: 16px;
 }
 
-label {
-  font-size: 20px;
-  font-weight: bold;
-}
-
 .tweet-list {
   list-style: none;
-  background-color: rgb(205, 220, 233);
   margin-bottom: 12px;
   border-radius: 4px;
 }
