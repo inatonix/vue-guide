@@ -8,6 +8,10 @@ const price2 = 20000
 
 const url1 = 'https://www.amazon.co.jp/dp/B09QMBH5R7'
 
+const buy = (itemName: string) => {
+  alert('Are you sure to buy ' + itemName + '?')
+}
+
 </script>
 
 <template>
@@ -17,10 +21,12 @@ const url1 = 'https://www.amazon.co.jp/dp/B09QMBH5R7'
       <label>{{ itemName1 }}</label>
       <label>{{ price1 }} yen</label>
       <a v-bind:href="url1">bought at...</a>
+      <button v-on:click="buy(itemName1)">BUY</button>
     </div>
     <div class="payment">
       <label>{{ itemName2 }}</label>
       <label>{{ price2 }} yen</label>
+      <button v-on:click="buy(itemName2)">BUY</button>
     </div>
   </div>
 </template>
