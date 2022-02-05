@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const tweets = ref([{ id: 0, description: 'Hello, world!' }, { id: 1, description: 'This is the second tweet.' }])
+const filteredTweets = ref(tweets.value)
 const inputtingDescription = ref<string>('')
+const selectedCondition = ref<number>(10000)
 
 const postTweet = () => {
   const tweet = { id: Math.random(), description: inputtingDescription.value }
@@ -13,6 +15,10 @@ const deleteTweet = (id: number) => {
   tweets.value = tweets.value.filter(v => v.id !== id)
 }
 
+watch(selectedCondition, () => {
+  filteredTweets.value = tweets.value.filter(v => v.description.length < selectedCondition.value)
+})
+
 </script>
 
 <template>
@@ -22,8 +28,13 @@ const deleteTweet = (id: number) => {
       <input v-model="inputtingDescription" />
       <button class="save-button" @click="postTweet">post</button>
     </div>
+    <select v-model="selectedCondition" class="filtering-select">
+      <option value="10">under 10</option>
+      <option value="20">under 20</option>
+      <option value="30">under 30</option>
+    </select>
     <div>
-      <li v-for="tweet in tweets" class="tweet-list">
+      <li v-for="tweet in filteredTweets" class="tweet-list">
         <label>{{ tweet.description }}</label>
         <button @click="deleteTweet(tweet.id)" class="delete-button">delete</button>
       </li>
@@ -57,6 +68,10 @@ const deleteTweet = (id: number) => {
   border: none;
   width: 60px;
   height: 22px;
+}
+
+.filtering-select {
+  margin-bottom: 8px;
 }
 
 .save-button:hover {
