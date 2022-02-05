@@ -1,60 +1,14 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-
-// const itemName1 = ref<string>('Desk')
-const itemName2 = 'Bike'
-
-const item1 = reactive({
-  name: 'Desk',
-  price: 40000
-})
-
-// const price1 = 40000
-const price2 = 20000
-
-const url1 = 'https://www.amazon.co.jp/dp/B09QMBH5R7'
-
-const buy = (itemName: string) => {
-  alert('Are you sure to buy ' + itemName + '?')
-}
-
-const clear = () => {
-  item1.name = ''
-  item1.price = 0
-}
-
-const budget = 50000
-
-const priceLabel = computed(() => {
-  if (item1.price > budget * 2) {
-    return 'toooooo expensive..'
-  } else if (item1.price > budget) {
-    return 'expensive..'
-  } else {
-    return item1.price + ' yen'
-  }
-})
-
+import { ref, reactive, computed, watch, toRefs, onMounted, onBeforeMount, onUpdated } from 'vue'
 
 </script>
 
 <template>
   <div class="container">
-    <h1>Payment</h1>
-    <input v-model="item1.name" />
-    <input v-model="item1.price" />
-    <button v-on:click="clear">Clear</button>
-    <div class="payment">
-      <label>{{ item1.name }}</label>
-      <label>{{ priceLabel }}</label>
-      <!-- <label>{{ item1.price }} yen</label> -->
-      <a v-bind:href="url1">bought at...</a>
-      <button v-on:click="buy(item1.name)">BUY</button>
-    </div>
-    <div class="payment">
-      <label>{{ itemName2 }}</label>
-      <label>{{ price2 }} yen</label>
-      <button v-on:click="buy(itemName2)">BUY</button>
+    <h1>Tweeter</h1>
+    <div class="form-container">
+      <input />
+      <button class="save-button">post</button>
     </div>
   </div>
 </template>
@@ -65,18 +19,34 @@ const priceLabel = computed(() => {
   flex-direction: column;
   align-items: center;
 }
-.payment {
+
+.form-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  height: 80px;
-  width: 400px;
   background-color: aliceblue;
-  margin-bottom: 8px;
+  padding: 24px 0;
+  width: 60%;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+button {
+  color: #fff;
+  font-weight: bold;
+  background-color: #68c9c9;
+  border-radius: 2px;
+  border: none;
+  width: 60px;
+  height: 22px;
+}
+
+button:hover {
+  background-color: #37bdbd;
 }
 
 input {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 label {
