@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Person } from './Person.vue';
 const inputtingName = ref<string>('')
 const inputtingAge = ref<number>(0)
@@ -11,6 +11,18 @@ const register = () => {
   emit('register', person)
 }
 
+const isValidName = computed(() => {
+  if (inputtingName.value.length >= 20) {
+    return false
+  } else {
+    return true
+  }
+})
+
+const color = computed(() => {
+  return isValidName.value ? 'white' : 'rgb(244, 194, 190)';
+})
+
 </script>
 
 <template>
@@ -18,14 +30,15 @@ const register = () => {
     <div class="input-container">
       <div class="input-column">
         <span>name:</span>
-        <input class="input" v-model="inputtingName" />
+        <input class="input-name" v-model="inputtingName" />
       </div>
+      <span v-if="!isValidName">10 characters or less, please.</span>
       <div class="input-column">
         <span>age:</span>
         <input type="number" class="input" v-model="inputtingAge" />
       </div>
     </div>
-    <button class="save-button" @click="register()">register</button>
+    <button class="save-button" @click="register()" :disabled="!isValidName">register</button>
   </div>
 </template>
 
@@ -60,6 +73,10 @@ span {
   justify-content: space-between;
 }
 
+.input-name {
+  background-color: v-bind(color);
+}
+
 input {
   width: 100px;
 }
@@ -75,6 +92,7 @@ input {
 }
 
 .save-button:disabled {
-  background-color: darkblue;
+  background-color: rgb(140, 140, 140);
+  color: rgb(94, 94, 94);
 }
 </style>
