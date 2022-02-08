@@ -7,8 +7,10 @@ type Props = {
 
 defineProps<Props>()
 const emit = defineEmits(['delete'])
-const onClickButton = (id: number) => {
-  emit('delete', id)
+const onClickButton = (id: number, name: string) => {
+  if (confirm('Delete ' + name + '?')) {
+    emit('delete', id)
+  }
 }
 
 </script>
@@ -17,7 +19,7 @@ const onClickButton = (id: number) => {
   <li v-for="person in persons" :key="person.id" class="person-list">
     <span>{{ person.name }}</span>
     <span>age:{{ person.age }}</span>
-    <button @click="onClickButton(person.id)" class="delete-button">
+    <button @click="onClickButton(person.id, person.name)" class="delete-button">
       <span>delete</span>
     </button>
   </li>

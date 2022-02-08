@@ -4,6 +4,8 @@ import { Person } from './Person.vue';
 const inputtingName = ref<string>('')
 const inputtingAge = ref<number>(0)
 
+const nameLengthLimit = 15
+
 const emit = defineEmits(['register'])
 
 const register = () => {
@@ -12,7 +14,7 @@ const register = () => {
 }
 
 const isValidName = computed(() => {
-  if (inputtingName.value.length >= 20) {
+  if (inputtingName.value.length >= nameLengthLimit) {
     return false
   } else {
     return true
@@ -32,7 +34,7 @@ const color = computed(() => {
         <span>name:</span>
         <input class="input-name" v-model="inputtingName" />
       </div>
-      <span v-if="!isValidName">10 characters or less, please.</span>
+      <span v-if="!isValidName">{{ nameLengthLimit }} characters or less, please.</span>
       <div class="input-column">
         <span>age:</span>
         <input type="number" class="input" v-model="inputtingAge" />
