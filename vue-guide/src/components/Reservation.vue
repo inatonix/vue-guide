@@ -1,6 +1,24 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import Card from './Card.vue';
 import Badge from './Badge.vue';
+import Calender from './Calender.vue';
+import MosaicCalendar from './MosaicCalendar.vue';
+
+const badgeName = 'VIP'
+
+const isMonthly = ref<boolean>(true)
+const calendar = computed(() => {
+  console.log('computed')
+  return isMonthly.value ? Calender : MosaicCalendar
+}
+)
+const onClickButton = () => {
+  isMonthly.value = !isMonthly.value
+  console.log('monthly ', isMonthly.value)
+}
+
+
 </script>
 
 <template>
@@ -9,32 +27,15 @@ import Badge from './Badge.vue';
       <span>Badges</span>
       <div class="badges">
         <Badge class="vip-badge">
-          <span>VIP</span>
+          <span>{{ badgeName }}</span>
         </Badge>
         <Badge class="normal-badge">
           <span>NORMAL</span>
         </Badge>
       </div>
     </Card>
-
-    <Card class="reservation-card">
-      <span>John Wick</span>
-      <Badge class="vip-badge">
-        <span>VIP</span>
-      </Badge>
-    </Card>
-    <Card class="reservation-card">
-      <span>Shuya Inada</span>
-      <Badge class="normal-badge">
-        <span>Normal</span>
-      </Badge>
-    </Card>
-    <Card class="reservation-card">
-      <span>Silver Leilly</span>
-      <Badge class="vip-badge">
-        <span>VIP</span>
-      </Badge>
-    </Card>
+    <component :is="calendar" />
+    <button @click="onClickButton">Change</button>
   </div>
 </template>
 
