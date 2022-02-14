@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import Reservation from './components/Reservation.vue';
+import { todos } from './components/useTodo';
+import TodoList from './components/TodoList.vue';
+import { inject, InjectionKey, provide, ref } from "vue";
+
+provide('todos', todos)
+
+// import Reservation from './components/Reservation.vue';
 </script>
 
 <template>
-  <Reservation></Reservation>
+  <TodoList />
+  <!-- <Reservation></Reservation> -->
 </template>
 
 <style>
