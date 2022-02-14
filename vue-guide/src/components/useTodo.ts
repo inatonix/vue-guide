@@ -20,5 +20,8 @@ export const todos = (() => {
   return { todos, addTodo };
 })();
 
-// export const provideTodos = () => provide('useTodos', todos);
-// export const useTodos = () => inject('useTodos')!;
+type TodosType = typeof todos;
+const todoKey: InjectionKey<TodosType> = Symbol("useTodos");
+
+export const provideTodos = () => provide(todoKey, todos);
+export const useTodos = () => inject(todoKey)!;
