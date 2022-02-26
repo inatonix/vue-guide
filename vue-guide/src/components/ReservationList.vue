@@ -14,11 +14,8 @@ type Reservation = {
   date: Date,
 }
 
-type Props = {
-  reservations: Reservation[]
-}
+const reservations: Reservation[] = [{ id: '1', title: 'Restaurant', date: new Date() }]
 
-defineProps<Props>()
 </script>
 
 <style scoped>

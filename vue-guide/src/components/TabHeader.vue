@@ -2,20 +2,25 @@
   <header>
     <nav>
       <ul>
-        <li>
+        <router-link to="/reservations">
           <button @click="emits('set-page', 'reservation-list')">Reservations</button>
-        </li>
-        <li>
+        </router-link>
+        <router-link to="/users">
           <button @click="emits('set-page', 'user-list')">Users</button>
-        </li>
+        </router-link>
       </ul>
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
-
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 const emits = defineEmits(['set-page'])
+
+const getURL = () => {
+  return Math.random() > 0.5 ? '/reservations' : '/users'
+}
 </script>
 
 <style scoped>

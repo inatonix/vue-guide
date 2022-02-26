@@ -1,7 +1,7 @@
 <template>
   <tab-header @set-page="setActiveTab"></tab-header>
   <div class="background">
-    <component :is="activeTab" :users="users" :reservations="reservations"></component>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -25,7 +25,6 @@ const setActiveTab = (updated: string) => {
 }
 
 const users = [{ id: '1', name: 'John' }, { id: '2', name: 'Michael' }]
-const reservations = [{ id: '1', title: 'Restaurant', date: new Date() }]
 
 
 </script>

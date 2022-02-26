@@ -1,23 +1,29 @@
 <template>
+  <button @click="onClickMove">Move to Reservation</button>
   <ul>
     <li v-for="user in users" :key="user.id">
-      <span>{{ user.name }}</span>
+      <router-link :to="'/users/' + user.id">
+        <span>{{ user.name }}</span>
+      </router-link>
     </li>
   </ul>
 </template>
 <script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router';
+
 type User = {
   id: string,
   name: string,
 }
 
-type Props = {
-  users: User[]
+
+const users: User[] = [{ id: '1', name: 'John' }, { id: '2', name: 'Michael' }]
+
+const route = useRoute()
+const router = useRouter()
+const onClickMove = () => {
+  router.push('/reservations')
 }
-
-
-const props = defineProps<Props>()
-console.log('users is ', props.users)
 
 </script>
 
