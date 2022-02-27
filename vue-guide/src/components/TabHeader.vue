@@ -14,13 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router';
 const emits = defineEmits(['set-page'])
-
-const getURL = () => {
-  return Math.random() > 0.5 ? '/reservations' : '/users'
-}
 </script>
 
 <style scoped>
@@ -63,5 +57,13 @@ button:active {
   color: #f1a80a;
   border-color: #f1a80a;
   background-color: #1a037e;
+}
+
+a:hover,
+a:active,
+a.router-link-active {
+  color: orange;
+  border-color: orange;
+  background-color: rgb(23, 102, 72);
 }
 </style>

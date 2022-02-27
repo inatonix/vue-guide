@@ -1,12 +1,17 @@
 <template>
-  <button @click="onClickMove">Move to Reservation</button>
-  <ul>
-    <li v-for="user in users" :key="user.id">
-      <router-link :to="'/users/' + user.id">
-        <span>{{ user.name }}</span>
-      </router-link>
-    </li>
-  </ul>
+  <div class="container">
+    <ul>
+      <li v-for="user in users" :key="user.id">
+        <router-link :to="'/users/' + user.id">
+          <span>{{ user.name }}</span>
+        </router-link>
+      </li>
+    </ul>
+    <div class="detail-view">
+      <router-view></router-view>
+    </div>
+    <button @click="onClickMove">Move to Reservation</button>
+  </div>
 </template>
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
@@ -19,7 +24,6 @@ type User = {
 
 const users: User[] = [{ id: '1', name: 'John' }, { id: '2', name: 'Michael' }]
 
-const route = useRoute()
 const router = useRouter()
 const onClickMove = () => {
   router.push('/reservations')
@@ -28,9 +32,18 @@ const onClickMove = () => {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-view {
+  background-color: rgb(202, 228, 202);
+  margin-bottom: 20px;
+}
+
 ul {
   list-style: none;
-  margin: 2rem auto;
   max-width: 20rem;
   padding: 0;
 }

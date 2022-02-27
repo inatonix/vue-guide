@@ -1,7 +1,9 @@
 <template>
-  <tab-header @set-page="setActiveTab"></tab-header>
-  <div class="background">
-    <router-view></router-view>
+  <div>
+    <tab-header @set-page="setActiveTab"></tab-header>
+    <div class="background">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -44,5 +46,6 @@ body {
 
 .background {
   display: flex;
+  justify-content: center;
 }
 </style>

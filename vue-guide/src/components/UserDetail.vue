@@ -1,9 +1,13 @@
-<template>user id is {{ userId }}</template>
+<template>
+  user id is {{ userId }}
+  <router-link to="/users/2">Move to User 2 detail</router-link>
+</template>
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
-const userId = route.params['id']
+const userId = ref(route.params['id'])
 
 </script>
 
